@@ -179,14 +179,7 @@
   //     return total + number * number;
   //   }); // should be 5, regardless of the iterator function passed in
   //          No accumulator is given so the first element is used.
-  _.reduce = function(collection, iterator, accumulator) {
-    // see if acc exists, store it as a boolean
-    // if true, run as normal
-    // if false, set first iteration through each, set acc as the first item
-    //    then update boolean to true
-    //     also update accumulator
-    // second iteration will behave differently 
-    
+  _.reduce = function(collection, iterator, accumulator) { 
     var isAcc = accumulator !== undefined;
     
     _.each(collection, function(item) {
@@ -199,18 +192,6 @@
       
     });
     return accumulator;
-    
-    
-    
-    // var coll = collection.slice();
-    // if (!accumulator) {
-    //   accumulator = collection[0];
-    //   coll.shift();
-    // }
-    // _.each(collection, function(item, index, collection) {
-    //   iterator(accumulator, item, index, collection);
-    // });
-    // return accumulator;
   };
 
   // Determine if the array or object contains a given value (using `===`).
@@ -228,7 +209,14 @@
 
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
-    // TIP: Try re-using reduce() here.
+    iterator = iterator || _.identity;
+    return _.reduce(collection, function(acc, item) {
+      if (!acc) {
+        return false;
+      } else {
+        return Boolean(iterator(item));
+      }
+    }, true); 
   };
 
   // Determine whether any of the elements pass a truth test. If no iterator is
