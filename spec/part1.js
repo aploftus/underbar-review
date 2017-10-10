@@ -467,7 +467,7 @@
         var orderTraversed = [];
 
         _.reduce([1, 2, 3, 4], function(memo, item) {
-          // FILL_ME_IN
+          orderTraversed.push(item);
           // Add a line here that makes this test pass
           // for a working implementation of reduce
           return memo;
@@ -499,7 +499,7 @@
         expect(result).to.equal(4);
       });
 
-      it('Fill me in with a description of the behavior this test is checking for', function() {
+      it('should set memo to be the value of the third argument', function() {
         var result = _.reduce([1, 2, 3], function(memo, item) {
           return memo * item;
         }, 0);
