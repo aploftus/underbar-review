@@ -311,6 +311,19 @@
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
+    // return closure function
+    // keep track of the results in an object
+    var results = {};
+    
+    return function() {
+      var key = JSON.stringify(arguments);
+      //if the results doesn't have the key of stringified args, set them to the func.apply(
+      if (results[key] === undefined) {
+        results[key] = func.apply(this, arguments);
+      }
+      return results[key];
+    };
+    
   };
 
   // Delays a function for the given number of milliseconds, and then calls
